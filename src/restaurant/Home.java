@@ -37,7 +37,20 @@ public class Home extends JPanel {
 		scrollPane.setBounds(10,140,1450,480);
 		add(scrollPane);
 		
-		    };
+		table.addMouseListener(new java.awt.event.MouseAdapter() {
+		    @Override
+		    public void mouseClicked(java.awt.event.MouseEvent evt) {
+		        int row = table.rowAtPoint(evt.getPoint());
+		        int col = table.columnAtPoint(evt.getPoint());
+		        if (row >= 0 && col == 0) {
+		        	RestaurantInfos.update(Restaurant.getRestaurantByName(String.valueOf(table.getValueAt(row, col))));
+		        	App.setVisibilityRestaurantInfo();		        	
+		        }
+		    }
+		});
+		        
+	}
+
     
     public JTable getRestaurantTable(ArrayList<Restaurant> restaurants) {
     	
