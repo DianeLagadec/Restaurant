@@ -107,4 +107,143 @@ public class Restaurant {
 		}
 	}
 	
+<<<<<<< Updated upstream
+=======
+	public static Restaurant getRestaurantByName(String name) {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT * FROM restaurant WHERE name='"+String.valueOf(name)+"' LIMIT 1";
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        Restaurant restaurant = new Restaurant();
+	        while(rs.next()) {
+	        	restaurant = new Restaurant(rs.getString("name"),
+						   rs.getString("adress"),	
+						   rs.getString("city"),
+						   rs.getString("zipCode"),
+						   rs.getString("mail"),
+						   rs.getString("phone"),
+						   rs.getString("label"),
+						   rs.getString("diet"),
+						   rs.getBoolean("doggyBag"), 
+						   rs.getBoolean("localProducts"));
+	        }
+	        	
+	        return restaurant;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	public static ArrayList<String> getAllNames() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT name FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("name"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	public static ArrayList<String> getAllCities() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT city FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("city"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	public static ArrayList<String> getAllRegimes() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT diet FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("diet"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	public static ArrayList<String> getAllLabels() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT label FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("label"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	public static Integer getIdByName(String name) {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT id FROM restaurant WHERE name='"+String.valueOf(name)+"' LIMIT 1";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        Integer id = 0;
+	        while(rs.next()) {
+	        	id = Integer.valueOf(rs.getInt("id"));
+	        }
+	        	
+	        return id;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+>>>>>>> Stashed changes
 }
