@@ -107,8 +107,7 @@ public class Restaurant {
 		}
 	}
 	
-<<<<<<< Updated upstream
-=======
+
 	public static Restaurant getRestaurantByName(String name) {
 		try {
 			Connection con = BDD.getConnection();
@@ -245,5 +244,4 @@ public class Restaurant {
 			
 		}
 	}
->>>>>>> Stashed changes
 }
