@@ -131,11 +131,3 @@ public class Message {
 		}
 	}
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
-=======
-
->>>>>>> Stashed changes
