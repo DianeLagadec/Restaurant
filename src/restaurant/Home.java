@@ -32,14 +32,16 @@ public class Home extends JPanel {
 	private static JComboBox<String> city, regime, label, local, doggy;
 	private static Set<String> localSet, doggySet;
 	private static JButton goButton;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 	
 	public Home() {
 		
     	setBounds(10,0,1480, 790);
     	setLayout(null);
     	init();
-    	
     	Font font16 = new Font("Comic Sans MS", Font.BOLD, 16);
 		Font font14 = new Font("Comic Sans MS", Font.PLAIN, 14);
 		
@@ -48,6 +50,17 @@ public class Home extends JPanel {
 		research.setFont(font16);
     	add(research);
     	
+<<<<<<< Updated upstream
+    	Font font16 = new Font("Comic Sans MS", Font.BOLD, 16);
+		Font font14 = new Font("Comic Sans MS", Font.PLAIN, 14);
+		
+		research = new JLabel("Recherchez votre restaurant :");
+		research.setBounds(10,20,400,30);
+		research.setFont(font16);
+    	add(research);
+    	
+=======
+>>>>>>> Stashed changes
     	ArrayList<String> cities = Restaurant.getAllCities();
     	city = new JComboBox<String>();
     	city.setBounds(10,50,150,30);
@@ -101,7 +114,10 @@ public class Home extends JPanel {
 		goButton.setBounds(1100,50,200,30);
 			
 		add(goButton);
+<<<<<<< Updated upstream
     	
+=======
+>>>>>>> Stashed changes
 	}
     	
     public void init() {
