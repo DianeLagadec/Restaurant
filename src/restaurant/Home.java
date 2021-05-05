@@ -33,7 +33,10 @@ public class Home extends JPanel {
 	private static Set<String> localSet, doggySet;
 	private static JButton goButton;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 	
@@ -51,6 +54,7 @@ public class Home extends JPanel {
     	add(research);
     	
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     	Font font16 = new Font("Comic Sans MS", Font.BOLD, 16);
 		Font font14 = new Font("Comic Sans MS", Font.PLAIN, 14);
 		
@@ -59,6 +63,8 @@ public class Home extends JPanel {
 		research.setFont(font16);
     	add(research);
     	
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     	ArrayList<String> cities = Restaurant.getAllCities();
@@ -115,7 +121,10 @@ public class Home extends JPanel {
 			
 		add(goButton);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     	
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 	}
