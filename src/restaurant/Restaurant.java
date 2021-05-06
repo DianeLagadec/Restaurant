@@ -157,6 +157,72 @@ public class Restaurant {
 		}
 	}
 	
+	public static ArrayList<String> getAllCities() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT city FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("city"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	public static ArrayList<String> getAllRegimes() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT diet FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("diet"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	public static ArrayList<String> getAllLabels() {
+		try {
+			Connection con = BDD.getConnection();
+			
+			String query = "SELECT label FROM restaurant";
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        
+	        ArrayList<String> names = new ArrayList<String>();
+	        while(rs.next()) {
+	        	names.add(rs.getString("label"));
+	        }
+	        	
+	        return names;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
 	public static Integer getIdByName(String name) {
 		try {
 			Connection con = BDD.getConnection();

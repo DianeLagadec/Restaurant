@@ -5,9 +5,12 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.sql.Date;
-//import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -40,12 +43,12 @@ public class SendMessage extends JPanel {
 		nameLabel.setFont(font14);
 		add(nameLabel);
 		
-		lastNameLabel = new JLabel("Entrer votre prénom : ");
+		lastNameLabel = new JLabel("Entrer votre prï¿½nom : ");
 		lastNameLabel.setBounds(50,150,200,20);
 		lastNameLabel.setFont(font14);
 		add(lastNameLabel);
 		
-		phoneLabel = new JLabel("Entrer votre numéro de téléphone : ");
+		phoneLabel = new JLabel("Entrer votre numï¿½ro de tï¿½lï¿½phone : ");
 		phoneLabel.setBounds(50,200,250,20);
 		phoneLabel.setFont(font14);
 		add(phoneLabel);
@@ -66,11 +69,11 @@ public class SendMessage extends JPanel {
 		add(commentLabel);
 		
 		name = new TextField();
-		name.setBounds(280,100,250,20);
+		name.setBounds(300,100,250,20);
 		add(name);
 		
 		lastName = new TextField();
-		lastName.setBounds(280,150,250,20);
+		lastName.setBounds(300,150,250,20);
 		add(lastName);
 		
 		phone = new TextField();
@@ -112,16 +115,16 @@ public class SendMessage extends JPanel {
 				String commentField = comment.getText();
 				
 				if(!nameField.isBlank() && !lastNameField.isBlank() && !phoneField.isBlank() && !emailField.isBlank() && !subjectField.isBlank() && !commentField.isEmpty()) {
-					error.setText("Le message à été envoyé");
+					error.setText("Le message a ete envoye");
 					error.setForeground(Color.GREEN);
 					error.setVisible(true);
 					
-					//DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-					//LocalDate localDate = LocalDate.now();
+					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+					LocalDate localDate = LocalDate.now();
 					
-					//Message message = new Message(nameField,lastNameField, subjectField, commentField, phoneField, emailField, Date.valueOf(dtf.format(localDate)));
+					Message message = new Message(nameField,lastNameField, subjectField, commentField, phoneField, emailField, Date.valueOf(dtf.format(localDate)));
 					
-					//Message.addMessage(message, id);
+					Message.addMessage(message, id);
 					
 					App.setVisibilityRestaurantInfo();
 					resetFields();
@@ -142,7 +145,7 @@ public class SendMessage extends JPanel {
 	}
 	
 	public static void sendMessageForm(Restaurant restaurant) {
-		title.setText("Vous aller envoyer un message à : "+restaurant.getName());
+		title.setText("Vous aller envoyer un message Ã  : "+restaurant.getName());
 		id = Restaurant.getIdByName(restaurant.getName());
 		
 	}

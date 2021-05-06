@@ -151,6 +151,12 @@ public class RestaurantInfos extends JPanel {
 	    	}	
 		});
     	
+    	reservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BookReservation.bookReservationForm(restaurantFinal);
+				App.setVisibilityToBookReservation();
+	    	}	
+		});
 	
 		
     }  

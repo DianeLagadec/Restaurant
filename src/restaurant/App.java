@@ -11,14 +11,15 @@ import javax.swing.JMenuItem;
 
 public class App {
 	
-	public static JFrame frame;
+	private static JMenu utils, adds, restaurant;
+	private static JMenuItem quit, homeMenu, addIngredient, addPlat, addRestaurant, resto;
 	public static Home home;
 	public static RestaurantInfos restaurantInfos;
 	public static RestaurantPanel restaurantPanel;
-	private static JMenu utils, adds, restaurant;
-	private static JMenuItem quit, homeMenu, addRestaurant, resto;
 	public static RestaurantProfessional restaurantProfessional;
 	public static SendMessage sendMessage;
+	public static JFrame frame;
+	public static BookReservation bookReservation;
 	
 	private static JMenuBar initMenu() {
 		utils = new JMenu("Home");
@@ -40,6 +41,31 @@ public class App {
         		restaurantPanel.setVisible(false);
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
+        		bookReservation.setVisible(false);
+ 		    }
+ 		});
+		
+		addIngredient = new JMenuItem(new AbstractAction("Add ingredient") {
+			private static final long serialVersionUID = 1L;
+        	public void actionPerformed(ActionEvent e) {
+        		home.setVisible(false);
+        		restaurantInfos.setVisible(false);
+        		restaurantPanel.setVisible(false);
+        		restaurantProfessional.setVisible(false);
+        		sendMessage.setVisible(false);
+        		bookReservation.setVisible(false);
+ 		    }
+ 		});
+		
+		addPlat = new JMenuItem(new AbstractAction("Add plat") {
+			private static final long serialVersionUID = 1L;
+        	public void actionPerformed(ActionEvent e) {
+        		home.setVisible(false);
+        		restaurantInfos.setVisible(false);
+        		restaurantPanel.setVisible(false);
+        		restaurantProfessional.setVisible(false);
+        		sendMessage.setVisible(false);
+        		bookReservation.setVisible(false);
  		    }
  		});
 		
@@ -51,8 +77,9 @@ public class App {
         		restaurantPanel.setVisible(false);
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
-        	}
-		});
+        		bookReservation.setVisible(false);
+ 		    }
+ 		});
 		
 		resto = new JMenuItem(new AbstractAction("Restaurant") {
 			private static final long serialVersionUID = 1L;
@@ -62,11 +89,14 @@ public class App {
         		restaurantPanel.setVisible(true);
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
+        		bookReservation.setVisible(false);
  		    }
  		});
 		
 		utils.add(homeMenu);
 		utils.add(quit);
+		adds.add(addIngredient);
+		adds.add(addPlat);
 		adds.add(addRestaurant);
 		restaurant.add(resto);
 		JMenuBar menuBar = new JMenuBar();
@@ -75,29 +105,28 @@ public class App {
 		menuBar.add(restaurant);		
 		return menuBar;
 	}
-		
+	
 	public static void init() {
-		
-		
 		frame.setTitle("Restaurants");
 		frame.setResizable(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBounds(50, 50, 1500, 800);
 		frame.setLayout(null);
+		frame.setJMenuBar(initMenu());
 		home = new Home();
-		frame.add(home);
 		restaurantInfos = new RestaurantInfos();
 		restaurantPanel = new RestaurantPanel();
 		restaurantProfessional = new RestaurantProfessional();
 		sendMessage = new SendMessage();
-		frame.add(restaurantInfos).setVisible(false);
+		bookReservation = new BookReservation();
+		frame.add(home);
 		frame.add(restaurantInfos).setVisible(false);
 		frame.add(restaurantPanel).setVisible(false);
 		frame.add(restaurantProfessional).setVisible(false);
 		frame.add(sendMessage).setVisible(false);
-		frame.setJMenuBar(initMenu());
+		frame.add(bookReservation).setVisible(false);
+		
 	}
-	
 	
 	public static void setVisibilityRestaurantInfo() {
 		home.setVisible(false);
@@ -105,6 +134,7 @@ public class App {
 		restaurantPanel.setVisible(false);
 		restaurantProfessional.setVisible(false);
 		sendMessage.setVisible(false);
+		bookReservation.setVisible(false);
 		
 	}
 	
@@ -114,6 +144,7 @@ public class App {
 		restaurantPanel.setVisible(false);
 		restaurantProfessional.setVisible(true);
 		sendMessage.setVisible(false);
+		bookReservation.setVisible(false);
 	}
 	
 	public static void setVisibilityToSendMessage() {
@@ -122,8 +153,19 @@ public class App {
 		restaurantPanel.setVisible(false);
 		restaurantProfessional.setVisible(false);
 		sendMessage.setVisible(true);
+		bookReservation.setVisible(false);
+		
 	}
 	
+	public static void setVisibilityToBookReservation() {
+		home.setVisible(false);
+		restaurantInfos.setVisible(false);
+		restaurantPanel.setVisible(false);
+		restaurantProfessional.setVisible(false);
+		sendMessage.setVisible(false);
+		bookReservation.setVisible(true);
+		
+	}
 	public static void main(String[] args) {
 		frame = new JFrame();
 		init();
