@@ -27,7 +27,7 @@ public class Home extends JPanel {
     private static JTable table;
     private static DefaultTableModel model;
     private static Vector<String> columnNames;
-    private static JLabel research, citylabel, regimelabel,labelslabel, locallabel, doggylabel;
+    private static JLabel research, citylabel, regimelabel,labelslabel, locallabel, doggylabel, Title, Slogan ;
 	private static DefaultComboBoxModel<String> listCities, listRegimes, listLabels, listLocals, listDoggy;
 	private static JComboBox<String> city, regime, label, local, doggy;
 	private static Set<String> localSet, doggySet;
@@ -36,26 +36,40 @@ public class Home extends JPanel {
 	
 	public Home() {
 		
-    	setBounds(10,0,1480, 790);
+    	setBounds(0,0,1480, 790);
     	setLayout(null);
     	init();
     	
+    	
+    	Font font30 = new Font("Comic Sans MS", Font.BOLD, 30);
     	Font font16 = new Font("Comic Sans MS", Font.BOLD, 16);
 		Font font14 = new Font("Comic Sans MS", Font.PLAIN, 14);
 		
+		Title = new JLabel("BON APPETIT");
+		Title.setBounds(600,20,400,30);
+		Title.setFont(font30);
+		Title.setForeground(Color.GREEN);
+    	add(Title);
+    	
+    	Slogan = new JLabel("Mangez mieux, mangez plus écoresponsables !!!");
+		Slogan.setBounds(550,40,400,30);
+		Slogan.setFont(font14);
+		Slogan.setForeground(Color.PINK);
+    	add(Slogan);
+		
 		research = new JLabel("Recherchez votre restaurant :");
-		research.setBounds(10,20,400,30);
+		research.setBounds(10,60,400,30);
 		research.setFont(font16);
     	add(research);
     	
     	citylabel = new JLabel("Ville : ");
-    	citylabel.setBounds(10, 50, 150,30);
+    	citylabel.setBounds(10, 110, 150,30);
     	citylabel.setFont(font14);
     	add(citylabel);
     	
     	ArrayList<String> cities = Restaurant.getAllCities();
     	city = new JComboBox<String>();
-    	city.setBounds(60,50,150,30);
+    	city.setBounds(60,110,150,30);
 		listCities = new DefaultComboBoxModel<String>(); 
 		listCities.addAll(cities);
 		city.setModel(listCities);
@@ -63,13 +77,13 @@ public class Home extends JPanel {
 		add(city);
 		
 		regimelabel = new JLabel("Régime alimentaire : ");
-    	regimelabel.setBounds(220, 50, 150,30);
+    	regimelabel.setBounds(220, 110, 150,30);
     	regimelabel.setFont(font14);
     	add(regimelabel);
 		
     	ArrayList<String> regimes = Restaurant.getAllRegimes();
     	regime = new JComboBox<String>();
-    	regime.setBounds(360,50,150,30);
+    	regime.setBounds(360,110,150,30);
     	listRegimes = new DefaultComboBoxModel<String>(); 
     	listRegimes.addAll(regimes);
 		regime.setModel(listRegimes);
@@ -77,13 +91,13 @@ public class Home extends JPanel {
 		add(regime);
 		
 		labelslabel = new JLabel("Label : ");
-    	labelslabel.setBounds(520, 50, 150,30);
+    	labelslabel.setBounds(520, 110, 150,30);
     	labelslabel.setFont(font14);
     	add(labelslabel);
     	
     	ArrayList<String> labels = Restaurant.getAllLabels();
     	label = new JComboBox<String>();
-    	label.setBounds(570,50,150,30);
+    	label.setBounds(570,110,150,30);
     	listLabels = new DefaultComboBoxModel<String>(); 
     	listLabels.addAll(labels);
     	label.setModel(listLabels);
@@ -91,12 +105,12 @@ public class Home extends JPanel {
 		add(label);
 		
 		locallabel = new JLabel("Nourriture locale : ");
-    	locallabel.setBounds(730, 50, 150,30);
+    	locallabel.setBounds(730, 110, 150,30);
     	locallabel.setFont(font14);
     	add(locallabel);
 		
     	local = new JComboBox<String>();
-    	local.setBounds(860,50,150,30);
+    	local.setBounds(860,110,150,30);
 		localSet = new TreeSet<String>();
     	listLocals = new DefaultComboBoxModel<String>(); 
     	localSet.add("No");
@@ -107,12 +121,12 @@ public class Home extends JPanel {
 		add(local);
 		
 		doggylabel = new JLabel("Doggy Bag : ");
-    	doggylabel.setBounds(1020, 50, 150,30);
+    	doggylabel.setBounds(1020, 110, 150,30);
     	doggylabel.setFont(font14);
     	add(doggylabel);
 		
 		doggy = new JComboBox<String>();
-		doggy.setBounds(1100,50,150,30);
+		doggy.setBounds(1100,110,150,30);
 		doggySet = new TreeSet<String>();
 		listDoggy = new DefaultComboBoxModel<String>(); 
 		doggySet.add("No");
@@ -123,7 +137,7 @@ public class Home extends JPanel {
 		add(doggy);
 		
 		JButton goButton = new JButton("Rechercher");
-		goButton.setBounds(1260,50,200,30);
+		goButton.setBounds(1260,110,200,30);
 			
 		add(goButton);
     	
@@ -134,7 +148,7 @@ public class Home extends JPanel {
     	restaurants = Restaurant.getAllRestaurants();
 		scrollPane = new JScrollPane(getRestaurantTable(restaurants));
 		scrollPane.setPreferredSize(new Dimension(1480,440));
-		scrollPane.setBounds(10,140,1450,480);
+		scrollPane.setBounds(10,200,1450,480);
 		add(scrollPane);
 		
 		table.addMouseListener(new java.awt.event.MouseAdapter() {
