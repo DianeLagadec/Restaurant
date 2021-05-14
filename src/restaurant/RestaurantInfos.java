@@ -141,6 +141,7 @@ public class RestaurantInfos extends JPanel {
     	notation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Notation");
+				App.setVisibilityToNotation();
 	    	}	
 		});
     	

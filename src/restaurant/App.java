@@ -20,6 +20,7 @@ public class App {
 	public static SendMessage sendMessage;
 	public static JFrame frame;
 	public static BookReservation bookReservation;
+	public static Notation notation;
 	
 	private static JMenuBar initMenu() {
 		utils = new JMenu("Home");
@@ -42,6 +43,7 @@ public class App {
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
+        		notation.setVisible(false);
  		    }
  		});
 		
@@ -54,6 +56,8 @@ public class App {
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
+        		notation.setVisible(false);
+        		
  		    }
  		});
 		
@@ -66,6 +70,7 @@ public class App {
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
+        		notation.setVisible(false);
  		    }
  		});
 		
@@ -78,6 +83,7 @@ public class App {
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
+        		notation.setVisible(false);
  		    }
  		});
 		
@@ -90,6 +96,7 @@ public class App {
         		restaurantProfessional.setVisible(false);
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
+        		notation.setVisible(false);
  		    }
  		});
 		
@@ -119,12 +126,14 @@ public class App {
 		restaurantProfessional = new RestaurantProfessional();
 		sendMessage = new SendMessage();
 		bookReservation = new BookReservation();
+		notation = new Notation();
 		frame.add(home);
 		frame.add(restaurantInfos).setVisible(false);
 		frame.add(restaurantPanel).setVisible(false);
 		frame.add(restaurantProfessional).setVisible(false);
 		frame.add(sendMessage).setVisible(false);
 		frame.add(bookReservation).setVisible(false);
+		frame.add(notation).setVisible(false);
 		
 	}
 	
@@ -135,6 +144,7 @@ public class App {
 		restaurantProfessional.setVisible(false);
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(false);
+		notation.setVisible(false);
 		
 	}
 	
@@ -145,6 +155,7 @@ public class App {
 		restaurantProfessional.setVisible(true);
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(false);
+		notation.setVisible(false);
 	}
 	
 	public static void setVisibilityToSendMessage() {
@@ -154,6 +165,7 @@ public class App {
 		restaurantProfessional.setVisible(false);
 		sendMessage.setVisible(true);
 		bookReservation.setVisible(false);
+		notation.setVisible(false);
 		
 	}
 	
@@ -164,6 +176,18 @@ public class App {
 		restaurantProfessional.setVisible(false);
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(true);
+		notation.setVisible(false);
+		
+	}
+	
+	public static void setVisibilityToNotation() {
+		home.setVisible(false);
+		restaurantInfos.setVisible(false);
+		restaurantPanel.setVisible(false);
+		restaurantProfessional.setVisible(false);
+		sendMessage.setVisible(false);
+		bookReservation.setVisible(false);
+		notation.setVisible(true);
 		
 	}
 	public static void main(String[] args) {

@@ -10,24 +10,30 @@ import java.time.LocalDate;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
+import java.util.TreeSet;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class SendMessage extends JPanel {
+public class Notation extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private static TextField name, lastName, phone, email, subject;
-	private static JLabel title, nameLabel, lastNameLabel, phoneLabel, emailLabel, subjectLabel, commentLabel, error;
+	private static TextField name;
+	private static JLabel title, nameLabel, commentLabel, notelabel, error;
 	private static JTextArea comment;
 	private static JButton send, cancel;
 	private static Integer id;
+	private static DefaultComboBoxModel<Integer> listNbrs;
+	private static JComboBox<Integer> nbretoile;
+	private static Set<Integer> etoile;
 	
-	
-	public SendMessage() {
+	public Notation() {
 
 		setBounds(10,0,1480, 790);
 		setLayout(null);
@@ -43,53 +49,23 @@ public class SendMessage extends JPanel {
 		nameLabel.setFont(font14);
 		add(nameLabel);
 		
-		lastNameLabel = new JLabel("Entrer votre prï¿½nom : ");
-		lastNameLabel.setBounds(50,150,200,20);
-		lastNameLabel.setFont(font14);
-		add(lastNameLabel);
 		
-		phoneLabel = new JLabel("Entrer votre numero de telephone : ");
-		phoneLabel.setBounds(50,200,250,20);
-		phoneLabel.setFont(font14);
-		add(phoneLabel);
+		notelabel = new JLabel("Choisir un chiffre entre 1 et 5 en fonction de votre satisfaction :");
+		notelabel.setBounds(50,200,800,20);
+		notelabel.setFont(font14);
+		add(notelabel);
 		
-		emailLabel = new JLabel("Entrer votre adresse email : ");
-		emailLabel.setBounds(50,250,250,20);
-		emailLabel.setFont(font14);
-		add(emailLabel);
-		
-		subjectLabel = new JLabel("Entrer le sujet de votre message : ");
-		subjectLabel.setBounds(50,300,250,20);
-		subjectLabel.setFont(font14);
-		add(subjectLabel);
-		
-		commentLabel = new JLabel("Entrer votre message : ");
-		commentLabel.setBounds(50,350,250,20);
+		commentLabel = new JLabel("Laissez votre commentaire : ");
+		commentLabel.setBounds(50,400,250,20);
 		commentLabel.setFont(font14);
 		add(commentLabel);
 		
 		name = new TextField();
-		name.setBounds(300,100,250,20);
+		name.setBounds(50,150,250,20);
 		add(name);
 		
-		lastName = new TextField();
-		lastName.setBounds(300,150,250,20);
-		add(lastName);
-		
-		phone = new TextField();
-		phone.setBounds(300,200,250,20);
-		add(phone);
-		
-		email = new TextField();
-		email.setBounds(300,250,250,20);
-		add(email);
-		
-		subject = new TextField();
-		subject.setBounds(300,300,250,20);
-		add(subject);
-		
 		comment = new JTextArea(10, 600);
-		comment.setBounds(50,400,600,200);
+		comment.setBounds(50,450,600,200);
 		add(comment);
 		
 		send = new JButton("Envoyer");
@@ -104,27 +80,35 @@ public class SendMessage extends JPanel {
 		error.setBounds(250,700,200,20);
 		add(error).setVisible(false);
 		
+		nbretoile = new JComboBox<Integer>();
+		etoile = new TreeSet<Integer>();
+		for (int i=1; i<=5; i++) {
+			etoile.add(i);
+		}
+		nbretoile.setBounds(50,250,150,30);
+		listNbrs = new DefaultComboBoxModel<Integer>(); 
+		listNbrs.addAll(etoile);
+		nbretoile.setModel(listNbrs);
+		nbretoile.setSelectedIndex(0);
+		add(nbretoile);
+		
 		send.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String nameField = name.getText();
-				String lastNameField = lastName.getText();
-				String phoneField = phone.getText();
-				String emailField = email.getText();
-				String subjectField = subject.getText();
 				String commentField = comment.getText();
 				
-				if(!nameField.isBlank() && !lastNameField.isBlank() && !phoneField.isBlank() && !emailField.isBlank() && !subjectField.isBlank() && !commentField.isEmpty()) {
-					error.setText("Le message a ete envoye");
+				if(!nameField.isBlank() && !commentField.isEmpty()) {
+					error.setText("Le commentaire a ete envoye");
 					error.setForeground(Color.GREEN);
 					error.setVisible(true);
 					
 					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 					LocalDate localDate = LocalDate.now();
 					
-					Message message = new Message(nameField,lastNameField, subjectField, commentField, phoneField, emailField, Date.valueOf(dtf.format(localDate)));
+					Note note = new Note(nameField, Integer.parseInt(nbretoile.getSelectedItem().toString()), commentField, Date.valueOf(dtf.format(localDate)));
 					
-					Message.addMessage(message, id);
+					Note.addNote(note, id);
 					
 					App.setVisibilityRestaurantInfo();
 					resetFields();
@@ -142,23 +126,19 @@ public class SendMessage extends JPanel {
 				resetFields();
 	    	}	
 		});
+
 	}
 	
-	public static void sendMessageForm(Restaurant restaurant) {
-		title.setText("Vous aller envoyer un message Ã  : "+restaurant.getName());
+	public static void NoteForm(Restaurant restaurant) {
+		title.setText("Vous aller laisser un commentaire à  "+restaurant.getName());
 		id = Restaurant.getIdByName(restaurant.getName());
 		
 	}
 	
 	private static void resetFields() {
 		name.setText("");
-		lastName.setText("");
-		phone.setText("");
-		email.setText("");
-		subject.setText("");
 		comment.setText("");
 		error.setVisible(false);
 	}
-
 
 }
