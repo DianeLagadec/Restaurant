@@ -12,7 +12,7 @@ import javax.swing.JMenuItem;
 public class App {
 	
 	private static JMenu utils, adds, restaurant;
-	private static JMenuItem quit, homeMenu, addIngredient, addPlat, addRestaurant, resto;
+	private static JMenuItem quit, homeMenu, addRestaurant, resto;
 	public static Home home;
 	public static RestaurantInfos restaurantInfos;
 	public static RestaurantPanel restaurantPanel;
@@ -21,6 +21,7 @@ public class App {
 	public static JFrame frame;
 	public static BookReservation bookReservation;
 	public static Notation notation;
+	public static Addrestaurant addrestau;
 	
 	private static JMenuBar initMenu() {
 		utils = new JMenu("Home");
@@ -44,35 +45,12 @@ public class App {
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
         		notation.setVisible(false);
+        		addrestau.setVisible(false);
  		    }
  		});
 		
-		addIngredient = new JMenuItem(new AbstractAction("Add ingredient") {
-			private static final long serialVersionUID = 1L;
-        	public void actionPerformed(ActionEvent e) {
-        		home.setVisible(false);
-        		restaurantInfos.setVisible(false);
-        		restaurantPanel.setVisible(false);
-        		restaurantProfessional.setVisible(false);
-        		sendMessage.setVisible(false);
-        		bookReservation.setVisible(false);
-        		notation.setVisible(false);
-        		
- 		    }
- 		});
 		
-		addPlat = new JMenuItem(new AbstractAction("Add plat") {
-			private static final long serialVersionUID = 1L;
-        	public void actionPerformed(ActionEvent e) {
-        		home.setVisible(false);
-        		restaurantInfos.setVisible(false);
-        		restaurantPanel.setVisible(false);
-        		restaurantProfessional.setVisible(false);
-        		sendMessage.setVisible(false);
-        		bookReservation.setVisible(false);
-        		notation.setVisible(false);
- 		    }
- 		});
+		
 		
 		addRestaurant = new JMenuItem(new AbstractAction("Add restaurant") {
 			private static final long serialVersionUID = 1L;
@@ -84,6 +62,7 @@ public class App {
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
         		notation.setVisible(false);
+        		addrestau.setVisible(true);
  		    }
  		});
 		
@@ -97,13 +76,12 @@ public class App {
         		sendMessage.setVisible(false);
         		bookReservation.setVisible(false);
         		notation.setVisible(false);
+        		addrestau.setVisible(false);
  		    }
  		});
 		
 		utils.add(homeMenu);
 		utils.add(quit);
-		adds.add(addIngredient);
-		adds.add(addPlat);
 		adds.add(addRestaurant);
 		restaurant.add(resto);
 		JMenuBar menuBar = new JMenuBar();
@@ -126,6 +104,7 @@ public class App {
 		restaurantProfessional = new RestaurantProfessional();
 		sendMessage = new SendMessage();
 		bookReservation = new BookReservation();
+		addrestau =new Addrestaurant();
 		notation = new Notation();
 		frame.add(home);
 		frame.add(restaurantInfos).setVisible(false);
@@ -134,6 +113,7 @@ public class App {
 		frame.add(sendMessage).setVisible(false);
 		frame.add(bookReservation).setVisible(false);
 		frame.add(notation).setVisible(false);
+		frame.add(addrestau).setVisible(false);
 		
 	}
 	
@@ -145,6 +125,7 @@ public class App {
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(false);
 		notation.setVisible(false);
+		addrestau.setVisible(false);
 		
 	}
 	
@@ -156,6 +137,8 @@ public class App {
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(false);
 		notation.setVisible(false);
+		addrestau.setVisible(false);
+		
 	}
 	
 	public static void setVisibilityToSendMessage() {
@@ -166,7 +149,7 @@ public class App {
 		sendMessage.setVisible(true);
 		bookReservation.setVisible(false);
 		notation.setVisible(false);
-		
+		addrestau.setVisible(false);
 	}
 	
 	public static void setVisibilityToBookReservation() {
@@ -177,7 +160,7 @@ public class App {
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(true);
 		notation.setVisible(false);
-		
+		addrestau.setVisible(false);
 	}
 	
 	public static void setVisibilityToNotation() {
@@ -188,8 +171,19 @@ public class App {
 		sendMessage.setVisible(false);
 		bookReservation.setVisible(false);
 		notation.setVisible(true);
-		
+		addrestau.setVisible(false);
 	}
+	
+	public static void setVisibilityToAddRestau() {
+		home.setVisible(false);
+		restaurantInfos.setVisible(false);
+		restaurantPanel.setVisible(false);
+		restaurantProfessional.setVisible(false);
+		sendMessage.setVisible(false);
+		bookReservation.setVisible(false);
+		notation.setVisible(false);
+		addrestau.setVisible(true);
+		}
 	public static void main(String[] args) {
 		frame = new JFrame();
 		init();

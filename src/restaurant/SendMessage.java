@@ -97,7 +97,7 @@ public class SendMessage extends JPanel {
 		add(send);
 		
 		cancel = new JButton("Annuler");
-		cancel.setBounds(350,650,200,20);
+		cancel.setBounds(350,650,150,20);
 		add(cancel);
 		
 		error = new JLabel();

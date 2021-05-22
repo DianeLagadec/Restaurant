@@ -140,7 +140,7 @@ public class RestaurantInfos extends JPanel {
     	
     	notation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Notation");
+				Notation.NoteForm(restaurantFinal);
 				App.setVisibilityToNotation();
 	    	}	
 		});
@@ -220,7 +220,7 @@ public class RestaurantInfos extends JPanel {
 		columnNameNote = new Vector<String>();
 		columnNameNote.addElement("Nom");
 		columnNameNote.addElement("Note");
-		columnNameNote.addElement("Commantaire");
+		columnNameNote.addElement("Commentaire");
 		columnNameNote.addElement("Date");
 	    
 		modelNote = new DefaultTableModel(getRowDataNotes(notes),columnNameNote);
@@ -295,6 +295,9 @@ public class RestaurantInfos extends JPanel {
 		plat.setEnabled(false);//can't edit table
 		plat.setFont(new Font("Comic Sans MS",Font.PLAIN, 15));
 	}
+	
+	
+	
 }
 
 	

@@ -55,7 +55,7 @@ public class Notation extends JPanel {
 		notelabel.setFont(font14);
 		add(notelabel);
 		
-		commentLabel = new JLabel("Laissez votre commentaire : ");
+		commentLabel = new JLabel("Ecrire votre commentaire : ");
 		commentLabel.setBounds(50,400,250,20);
 		commentLabel.setFont(font14);
 		add(commentLabel);
@@ -65,7 +65,7 @@ public class Notation extends JPanel {
 		add(name);
 		
 		comment = new JTextArea(10, 600);
-		comment.setBounds(50,450,600,200);
+		comment.setBounds(50,430,600,200);
 		add(comment);
 		
 		send = new JButton("Envoyer");
@@ -73,7 +73,7 @@ public class Notation extends JPanel {
 		add(send);
 		
 		cancel = new JButton("Annuler");
-		cancel.setBounds(350,650,200,20);
+		cancel.setBounds(350,650,150,20);
 		add(cancel);
 		
 		error = new JLabel();
