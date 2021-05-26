@@ -2,6 +2,7 @@ package restaurant;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class Note {
 			
 			String query = "SELECT * FROM restaurant_note "
 					+ "INNER JOIN notes "
-					+ "ON restaurant_note.idNote = notes.id "
+					+ "ON restaurant_note.idNote = Notes.id "
 					+ "WHERE restaurant_note.idRestaurant ="+id;
 			
 	        Statement smt = con.createStatement();
@@ -77,7 +78,7 @@ public class Note {
 			
 			String query = "SELECT AVG(note) AS average FROM restaurant_note "
 					+ "INNER JOIN notes "
-					+ "ON restaurant_note.idNote = notes.id "
+					+ "ON restaurant_note.idNote = Notes.id "
 					+ "WHERE restaurant_note.idRestaurant ="+id;
 			
 			
@@ -97,5 +98,48 @@ public class Note {
 			
 		}
 	}
-
+	
+	public static void addNote(Note note, Integer id) {
+		Integer idInserted = 0;
+		
+		try {
+			Connection con = BDD.getConnection();
+			String query = "insert into Notes (name, note, comment, date)" + " values (?, ?, ?, ?)";
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			
+			preparedStmt.setString(1, note.getName());
+			preparedStmt.setInt(2, note.getNote());
+			preparedStmt.setString(3, note.getComment());
+			preparedStmt.setDate(4, note.getDate());
+			
+			preparedStmt.execute();
+			
+			ResultSet rs = preparedStmt.getGeneratedKeys();
+			if (rs.next()){
+				idInserted = rs.getInt(1);
+			}
+			con.close();
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+		}
+		
+		try {
+			Connection con = BDD.getConnection();
+			String query = "insert into restaurant_note (idRestaurant, idNote)" + " values (?, ?)";
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query);
+			
+			preparedStmt.setInt(1, id);
+			preparedStmt.setInt(2, idInserted);
+			
+			preparedStmt.execute();
+			
+			con.close();
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+		}
+	}
 }
+
+
