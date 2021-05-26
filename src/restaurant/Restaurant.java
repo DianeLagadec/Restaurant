@@ -3,6 +3,7 @@ package restaurant;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -242,5 +243,39 @@ public class Restaurant {
 			throw new EmptyStackException();
 			
 		}
+	}
+	
+	public static void addRestaurant(Restaurant restaurant, Integer id) {
+		Integer idInserted = 0;
+		
+		try {
+			Connection con = BDD.getConnection();
+			String query = "insert into restaurant (name, adress, city, zipCode,  phone, mail, diet, localProducts, doggyBag, label, plat)" + " values (?, ?, ?, ?,? ,? ,? ,?,?,?,?)";
+			
+			PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			
+			preparedStmt.setString(1, restaurant.getName());
+			preparedStmt.setString(2, restaurant.getAdress());
+			preparedStmt.setString(3, restaurant.getCity());
+			preparedStmt.setString(4, restaurant.getZipCode());
+			preparedStmt.setString(5, restaurant.getPhone());
+			preparedStmt.setString(6, restaurant.getMail());
+			preparedStmt.setString(7, restaurant.getDiet());
+			preparedStmt.setBoolean(8, restaurant.getLocalProducts());
+			preparedStmt.setBoolean(9, restaurant.getDoggyBag());
+			preparedStmt.setString(10, restaurant.getLabel());
+			
+			
+			preparedStmt.execute();
+			
+			ResultSet rs = preparedStmt.getGeneratedKeys();
+			if (rs.next()){
+				idInserted = rs.getInt(1);
+			}
+			con.close();
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+		}
+		
 	}
 }
