@@ -2,6 +2,8 @@ package restaurant;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.HashSet;
+import java.util.TreeSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -115,27 +117,91 @@ public class Restaurant {
 			String query = "SELECT * FROM restaurant WHERE name='"+String.valueOf(name)+"' LIMIT 1";
 	        Statement smt = con.createStatement();
 	        ResultSet rs = smt.executeQuery(query);
-	        Restaurant restaurant = new Restaurant();
+	        Restaurant restaurants = new Restaurant();
 	        while(rs.next()) {
-	        	restaurant = new Restaurant(rs.getString("name"),
-						   rs.getString("adress"),	
-						   rs.getString("city"),
-						   rs.getString("zipCode"),
-						   rs.getString("mail"),
-						   rs.getString("phone"),
-						   rs.getString("label"),
-						   rs.getString("diet"),
-						   rs.getBoolean("doggyBag"), 
-						   rs.getBoolean("localProducts"));
+	        	Restaurant restaurant = new Restaurant(rs.getString("name"),
+	        										   rs.getString("adress"),	
+	        										   rs.getString("city"),
+	        										   rs.getString("zipCode"),
+	        										   rs.getString("mail"),
+	        										   rs.getString("phone"),
+	        										   rs.getString("label"),
+	        										   rs.getString("diet"),
+	        										   rs.getBoolean("doggyBag"), 
+	        										   rs.getBoolean("localProducts"));
+	            restaurants=restaurant;
 	        }
-	        	
-	        return restaurant;
+	        return restaurants;
 		} catch (Exception e ){
 			System.err.println(e.getMessage());
 			throw new EmptyStackException();
 			
 		}
 	}
+	
+	public static ArrayList<Restaurant> getRestaurantsWithArgs(String city, String diet, String label, String local, String doggy) {
+		
+		ArrayList<String> queryElements = new ArrayList<String>();
+		
+		if(city != "-") {
+			queryElements.add("city='"+city+"'");
+		}
+		if(diet != "-") {
+			queryElements.add("diet='"+diet+"'");
+		}
+		if(label != "-") {
+			queryElements.add("label='"+label+"'");
+		}
+		if(local != "-") {
+			queryElements.add(local == "Yes" ? "localProducts = 1" : "localProducts = 0");
+		}
+		if(doggy != "-") {
+			queryElements.add(doggy == "Yes" ? "doggyBag = 1" : "doggyBag = 0");
+		}
+		
+		String query = "SELECT * FROM restaurant";
+		if (queryElements.size() == 1) {
+			query += " WHERE "+queryElements.get(0);
+		} else if (queryElements.size() > 1) {
+			query += " WHERE ";
+			for(int i = 0; i<queryElements.size(); i++) {
+				if(i != queryElements.size()-1) {
+					query+=queryElements.get(i)+" AND ";
+				} else {
+					query+=queryElements.get(i);
+				}								
+			}
+		}
+				
+		try {
+			Connection con = BDD.getConnection();
+			
+	        Statement smt = con.createStatement();
+	        ResultSet rs = smt.executeQuery(query);
+	        ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+	        while(rs.next()) {
+	        	Restaurant restaurant = new Restaurant(rs.getString("name"),
+	        										   rs.getString("adress"),	
+	        										   rs.getString("city"),
+	        										   rs.getString("zipCode"),
+	        										   rs.getString("mail"),
+	        										   rs.getString("phone"),
+	        										   rs.getString("label"),
+	        										   rs.getString("diet"),
+	        										   rs.getBoolean("doggyBag"), 
+	        										   rs.getBoolean("localProducts"));
+	        	restaurants.add(restaurant);
+	            
+	        }
+	        return restaurants;
+		} catch (Exception e ){
+			System.err.println(e.getMessage());
+			throw new EmptyStackException();
+			
+		}
+	}
+	
+	
 	public static ArrayList<String> getAllNames() {
 		try {
 			Connection con = BDD.getConnection();
@@ -246,11 +312,10 @@ public class Restaurant {
 	}
 	
 	public static void addRestaurant(Restaurant restaurant, Integer id) {
-		Integer idInserted = 0;
 		
 		try {
 			Connection con = BDD.getConnection();
-			String query = "insert into restaurant (name, adress, city, zipCode,  phone, mail, diet, localProducts, doggyBag, label, plat)" + " values (?, ?, ?, ?,? ,? ,? ,?,?,?,?)";
+			String query = "insert into restaurant (name, adress, city, zipCode,  phone, mail, diet, localProducts, doggyBag, label)" + " values (?, ?, ?, ?,? ,? ,? ,?,?,?)";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			
@@ -267,11 +332,7 @@ public class Restaurant {
 			
 			
 			preparedStmt.execute();
-			
-			ResultSet rs = preparedStmt.getGeneratedKeys();
-			if (rs.next()){
-				idInserted = rs.getInt(1);
-			}
+		
 			con.close();
 		} catch (Exception e ){
 			System.err.println(e.getMessage());

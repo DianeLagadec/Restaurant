@@ -3,7 +3,13 @@ package restaurant;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
@@ -31,8 +37,9 @@ public class Home extends JPanel {
 	private static DefaultComboBoxModel<String> listCities, listRegimes, listLabels, listLocals, listDoggy;
 	private static JComboBox<String> city, regime, label, local, doggy;
 	private static Set<String> localSet, doggySet;
-	private static JButton goButton;
-
+	private static final ArrayList<String> regimes = new ArrayList<String>();
+	private static final ArrayList<String> labels = new ArrayList<String>();
+	private static final ArrayList<String> cities = new ArrayList<String>();
 	
 	public Home() {
 		
@@ -51,7 +58,7 @@ public class Home extends JPanel {
 		Title.setForeground(Color.GREEN);
     	add(Title);
     	
-    	Slogan = new JLabel("Mangez mieux, mangez plus écoresponsables !!!");
+    	Slogan = new JLabel("Mangez mieux, mangez plus Ã©coresponsables !!!");
 		Slogan.setBounds(550,40,400,30);
 		Slogan.setFont(font14);
 		Slogan.setForeground(Color.PINK);
@@ -67,7 +74,8 @@ public class Home extends JPanel {
     	citylabel.setFont(font14);
     	add(citylabel);
     	
-    	ArrayList<String> cities = Restaurant.getAllCities();
+    	cities.addAll(Restaurant.getAllCities());
+    	cities.add(0,"-");
     	city = new JComboBox<String>();
     	city.setBounds(60,110,150,30);
 		listCities = new DefaultComboBoxModel<String>(); 
@@ -76,12 +84,13 @@ public class Home extends JPanel {
 		city.setSelectedIndex(0);
 		add(city);
 		
-		regimelabel = new JLabel("Régime alimentaire : ");
+		regimelabel = new JLabel("RÃ©gime alimentaire : ");
     	regimelabel.setBounds(220, 110, 150,30);
     	regimelabel.setFont(font14);
     	add(regimelabel);
 		
-    	ArrayList<String> regimes = Restaurant.getAllRegimes();
+    	regimes.addAll(Restaurant.getAllRegimes());
+    	regimes.add(0,"-");
     	regime = new JComboBox<String>();
     	regime.setBounds(360,110,150,30);
     	listRegimes = new DefaultComboBoxModel<String>(); 
@@ -95,7 +104,8 @@ public class Home extends JPanel {
     	labelslabel.setFont(font14);
     	add(labelslabel);
     	
-    	ArrayList<String> labels = Restaurant.getAllLabels();
+    	labels.addAll(Restaurant.getAllLabels());
+    	labels.add(0,"-");
     	label = new JComboBox<String>();
     	label.setBounds(570,110,150,30);
     	listLabels = new DefaultComboBoxModel<String>(); 
@@ -115,6 +125,7 @@ public class Home extends JPanel {
     	listLocals = new DefaultComboBoxModel<String>(); 
     	localSet.add("No");
     	localSet.add("Yes");
+    	localSet.add("-");
     	listLocals.addAll(localSet);
     	local.setModel(listLocals);
     	local.setSelectedIndex(0);
@@ -129,8 +140,9 @@ public class Home extends JPanel {
 		doggy.setBounds(1100,110,150,30);
 		doggySet = new TreeSet<String>();
 		listDoggy = new DefaultComboBoxModel<String>(); 
-		doggySet.add("No");
 		doggySet.add("Yes");
+		doggySet.add("No");
+		doggySet.add("-");
     	listDoggy.addAll(doggySet);
     	doggy.setModel(listDoggy);
     	doggy.setSelectedIndex(0);
@@ -141,6 +153,47 @@ public class Home extends JPanel {
 			
 		add(goButton);
     	
+		goButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String city1 = (String)city.getSelectedItem();
+				String diet1 = (String)regime.getSelectedItem();
+				String label1 = (String)label.getSelectedItem();
+				String local1 = (String)local.getSelectedItem();
+				String doggy1 = (String)doggy.getSelectedItem();
+								
+				model.setDataVector(getRowData(Restaurant.getRestaurantsWithArgs(city1,diet1,label1,local1,doggy1)), columnNames);
+				setTableStyle();
+		
+	    	}	
+		});
+	}
+	
+	public static void refreshHomePage() {
+		model.setDataVector(getRowData(Restaurant.getAllRestaurants()), columnNames);
+		listCities.removeAllElements();
+		ArrayList<String> cityList = new ArrayList<String>();
+		cityList.add(0,"-");
+		listCities.addAll(cityList);
+		listCities.addAll(Restaurant.getAllCities());
+		city.setSelectedIndex(0);
+		
+		listRegimes.removeAllElements();
+		ArrayList<String> regimesList = new ArrayList<String>();
+		regimesList.add(0,"-");
+		listRegimes.addAll(regimesList);
+		listRegimes.addAll(Restaurant.getAllRegimes());
+		regime.setSelectedIndex(0);
+		
+		listLabels.removeAllElements();
+		ArrayList<String> labelList = new ArrayList<String>();
+		labelList.add(0,"-");
+		listLabels.addAll(labelList);
+		listLabels.addAll(Restaurant.getAllLabels());
+		label.setSelectedIndex(0);
+		setTableStyle();
+		
+		
 	}
     	
 	public void init() {
@@ -162,6 +215,7 @@ public class Home extends JPanel {
 		        }
 		    }
 		});
+		
 		        
 	}
     
@@ -173,7 +227,7 @@ public class Home extends JPanel {
 	    columnNames.addElement("Nom");
 	    columnNames.addElement("Adresse");
 	    columnNames.addElement("Ville");
-	    columnNames.addElement("Régime");
+	    columnNames.addElement("RÃ©gime");
 	    columnNames.addElement("Label");
 	    columnNames.addElement("Produits Locaux");
 	    columnNames.addElement("Doggy Bag");
@@ -192,7 +246,7 @@ public class Home extends JPanel {
 		return table;	
 	}
     
-	private  Vector<Vector<String>> getRowData(ArrayList<Restaurant> restaurants) {
+	private static  Vector<Vector<String>> getRowData(ArrayList<Restaurant> restaurants) {
 		Vector<Vector<String>> rowData = new Vector<Vector<String>>();
 		for(Restaurant restaurant : restaurants) {
 			Vector<String> rows = new Vector<String>();
@@ -210,7 +264,7 @@ public class Home extends JPanel {
 		
 	}
 	
-	private void setTableStyle() {
+	private static void setTableStyle() {
 	    DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 

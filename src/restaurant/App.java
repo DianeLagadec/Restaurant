@@ -184,6 +184,18 @@ public class App {
 		notation.setVisible(false);
 		addrestau.setVisible(true);
 		}
+	
+	public static void setVisibilityToHome() {
+		home.setVisible(true);
+		restaurantInfos.setVisible(false);
+		restaurantPanel.setVisible(false);
+		restaurantProfessional.setVisible(false);
+		sendMessage.setVisible(false);
+		bookReservation.setVisible(false);
+		notation.setVisible(false);
+		addrestau.setVisible(false);
+		}
+	
 	public static void main(String[] args) {
 		frame = new JFrame();
 		init();

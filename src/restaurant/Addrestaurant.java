@@ -83,7 +83,7 @@ public class Addrestaurant extends JPanel {
 			adresse.setBounds(300,250,250,20);
 			add(adresse);
 			
-			ville = new JLabel("Ville: ");
+			ville = new JLabel("Ville : ");
 			ville.setBounds(50,300,200,20);
 			ville.setFont(font14);
 			add(ville);
@@ -92,7 +92,7 @@ public class Addrestaurant extends JPanel {
 			villetext.setBounds(300,300,250,20);
 			add(villetext);
 			
-			zipcode = new JLabel(" Code postal: ");
+			zipcode = new JLabel("Code postal : ");
 			zipcode.setBounds(50,350,200,20);
 			zipcode.setFont(font14);
 			add(zipcode);
@@ -110,7 +110,7 @@ public class Addrestaurant extends JPanel {
 			labeltext.setBounds(300,400,250,20);
 			add(labeltext);
 			
-			doggylabel = new JLabel("Présence de doggy Bag : ");
+			doggylabel = new JLabel("PrÃ©sence de doggy Bag : ");
 	    	doggylabel.setBounds(50, 450,200,20);
 	    	doggylabel.setFont(font14);
 	    	add(doggylabel);
@@ -126,7 +126,7 @@ public class Addrestaurant extends JPanel {
 	    	doggy.setSelectedIndex(0);
 			add(doggy);
 			
-			regime = new JLabel("Régime alimentaire : ");
+			regime = new JLabel("RÃ©gime alimentaire : ");
 			regime.setBounds(50,500,200,20);
 			regime.setFont(font14);
 			add(regime);
@@ -177,7 +177,7 @@ public class Addrestaurant extends JPanel {
 					
 					
 					if(!nameField.isBlank() && !emailField.isEmpty() && !telField.isEmpty() &&  !adresseField.isEmpty() && !villeField.isEmpty() && !labelField.isEmpty() && !regimeField.isEmpty() && !zipField.isEmpty()) {
-						error.setText("Le restaurant a ete ajouté");
+						error.setText("Le restaurant a ete ajoutï¿½");
 						error.setForeground(Color.GREEN);
 						error.setVisible(true);
 						
@@ -185,9 +185,9 @@ public class Addrestaurant extends JPanel {
 						Restaurant restau = new Restaurant(nameField, adresseField, villeField, zipField, emailField, telField, labelField,regimeField,(Boolean)doggy.getSelectedItem(),(Boolean)local.getSelectedItem()  );
 						
 						Restaurant.addRestaurant(restau, id);
-						
-						App.setVisibilityRestaurantInfo();
+						App.setVisibilityToHome();
 						resetFields();
+						Home.refreshHomePage();
 					} else {
 						error.setText("Un des champs n'est pas rempli");
 						error.setForeground(Color.RED);
@@ -206,7 +206,7 @@ public class Addrestaurant extends JPanel {
 		}
 		
 		public static void NoteForm(Restaurant restaurant) {
-			title.setText("Vous aller laisser un commentaire à  "+restaurant.getName());
+			title.setText("Vous aller laisser un commentaire Ã  : "+restaurant.getName());
 			id = Restaurant.getIdByName(restaurant.getName());
 			
 		}
