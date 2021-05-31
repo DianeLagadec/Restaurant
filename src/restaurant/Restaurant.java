@@ -235,7 +235,7 @@ public class Restaurant {
 	        
 	        ArrayList<String> names = new ArrayList<String>();
 	        while(rs.next()) {
-	        	names.add(rs.getString("city"));
+	        		names.add(rs.getString("city"));
 	        }
 	        	
 	        return names;

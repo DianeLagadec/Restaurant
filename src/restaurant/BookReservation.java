@@ -59,12 +59,12 @@ public class BookReservation extends JPanel {
 		nameLabel.setFont(font14);
 		add(nameLabel);
 		
-		lastNameLabel = new JLabel("Entrer votre prénom : ");
+		lastNameLabel = new JLabel("Entrer votre prenom : ");
 		lastNameLabel.setBounds(50,150,200,20);
 		lastNameLabel.setFont(font14);
 		add(lastNameLabel);
 		
-		phoneLabel = new JLabel("Entrer votre numéro de téléphone : ");
+		phoneLabel = new JLabel("Entrer votre numero de telephone : ");
 		phoneLabel.setBounds(50,200,250,20);
 		phoneLabel.setFont(font14);
 		add(phoneLabel);
@@ -74,7 +74,7 @@ public class BookReservation extends JPanel {
 		emailLabel.setFont(font14);
 		add(emailLabel);
 		
-		dateLabel = new JLabel("Entrer la date (jour, mois, année) : ");
+		dateLabel = new JLabel("Entrer la date (jour, mois, annee) : ");
 		dateLabel.setBounds(50,300,250,20);
 		dateLabel.setFont(font14);
 		add(dateLabel);
@@ -207,7 +207,7 @@ public class BookReservation extends JPanel {
 				String emailField = email.getText();
 				
 				if(!nameField.isBlank() && !lastNameField.isBlank() && !phoneField.isBlank() && !emailField.isBlank()) {
-					error.setText("La reservation a été envoyée");
+					error.setText("La reservation a ï¿½tï¿½ envoyï¿½e");
 					error.setForeground(Color.GREEN);
 					error.setVisible(true);
 										

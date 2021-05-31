@@ -130,7 +130,7 @@ public class Notation extends JPanel {
 	}
 	
 	public static void NoteForm(Restaurant restaurant) {
-		title.setText("Vous aller laisser un commentaire à  "+restaurant.getName());
+		title.setText("Vous aller laisser une note a :  "+restaurant.getName());
 		id = Restaurant.getIdByName(restaurant.getName());
 		
 	}

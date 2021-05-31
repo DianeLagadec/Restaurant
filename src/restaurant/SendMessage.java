@@ -43,7 +43,7 @@ public class SendMessage extends JPanel {
 		nameLabel.setFont(font14);
 		add(nameLabel);
 		
-		lastNameLabel = new JLabel("Entrer votre pr�nom : ");
+		lastNameLabel = new JLabel("Entrer votre prenom : ");
 		lastNameLabel.setBounds(50,150,200,20);
 		lastNameLabel.setFont(font14);
 		add(lastNameLabel);

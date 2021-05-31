@@ -50,7 +50,7 @@ public class RestaurantInfos extends JPanel {
 		zipCode.setBounds(520, 162, 150, 20);
 		cityLable.setBounds(580, 162, 150, 20);
 		contact = new JLabel("Contact : ");
-		phone = new JLabel("Téléhone : ");
+		phone = new JLabel("Telephone : ");
 		mail = new JLabel("Email : ");
 		localization = new JLabel("Localisation : "); 
 		city = new JLabel("Ville :" );

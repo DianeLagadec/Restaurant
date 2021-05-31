@@ -201,7 +201,7 @@ public class Home extends JPanel {
     	restaurants = Restaurant.getAllRestaurants();
 		scrollPane = new JScrollPane(getRestaurantTable(restaurants));
 		scrollPane.setPreferredSize(new Dimension(1480,440));
-		scrollPane.setBounds(10,200,1450,480);
+		scrollPane.setBounds(10,200,1400,480);
 		add(scrollPane);
 		
 		table.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -275,7 +275,7 @@ public class Home extends JPanel {
 		table.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
 		table.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
 		table.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
-		table.setRowHeight(25);
+		table.setRowHeight(35);
 		table.setGridColor(Color.BLACK);
 		table.setRowSelectionAllowed(false);//disable the online blue 
 		table.setEnabled(false);//can't edit table

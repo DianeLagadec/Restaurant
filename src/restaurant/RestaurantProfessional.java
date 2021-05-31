@@ -30,7 +30,7 @@ public class RestaurantProfessional extends JPanel {
 		setLayout(null);
 
 		Font font16 = new Font("Comic Sans MS", Font.BOLD, 16);
-		nbrResa = new JLabel("Réservations : ");
+		nbrResa = new JLabel("Reservations : ");
     	nbrResa.setBounds(50, 150, 150,20);
     	nbrResa.setFont(font16);
     	add(nbrResa);
@@ -73,11 +73,11 @@ public class RestaurantProfessional extends JPanel {
 			
 			columnNames = new Vector<String>();
 		    columnNames.addElement("Nom");
-		    columnNames.addElement("Prénom");
+		    columnNames.addElement("Prenom");
 		    columnNames.addElement("Nombre");
 		    columnNames.addElement("Date");
 		    columnNames.addElement("Heure");
-		    columnNames.addElement("Téléphone");
+		    columnNames.addElement("Telephone");
 		    columnNames.addElement("Email");
 		    
 			model = new DefaultTableModel(getRowData(reservations),columnNames);
@@ -135,10 +135,10 @@ public class RestaurantProfessional extends JPanel {
 		
 		columnMessages = new Vector<String>();
 		columnMessages.addElement("Nom");
-		columnMessages.addElement("Prénom");
+		columnMessages.addElement("Prenom");
 		columnMessages.addElement("Sujet");
 		columnMessages.addElement("Commentaire");
-		columnMessages.addElement("Téléphone");
+		columnMessages.addElement("Telephone");
 		columnMessages.addElement("Email");
 		columnMessages.addElement("Date");
 	    
